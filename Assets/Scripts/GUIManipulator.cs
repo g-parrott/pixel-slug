@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+// demonstrates how one might represent the state
+// of some object with Unity's button
 public class GUIManipulator : MonoBehaviour
 {
     // editor configurable parameters
@@ -73,6 +75,7 @@ public class GUIManipulator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // increment the counter when space is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _timesPressed += 1;
@@ -81,21 +84,27 @@ public class GUIManipulator : MonoBehaviour
         UpdateButtonText();
     }
 
+    // updates the _buttonText Text component with the most recent text
     private void UpdateButtonText()
     {
         _buttonText.text = GetButtonText();
     }
 
+    // updates _countText to represent the most recent state
     private void UpdateCountText()
     {
         _countText = "Space Pressed " + _timesPressed + " Times";
     }
 
+    // updates _switchText to represent the most recent state
     private void UpdateSwitchText()
     {
         _switchText = (_on) ? _onText : _offText;
     }
 
+    // updates the _countText and _switchText to represent their most
+    // recently relevant state
+    // returns the most recently updated text for the button
     private string GetButtonText()
     {
         UpdateCountText();
