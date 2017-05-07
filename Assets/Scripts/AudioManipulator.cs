@@ -4,9 +4,6 @@ using UnityEngine;
 
 // demonstrates the use of Unity's AudioClip
 // and built-in distortion filter
-// 
-// Takes an audio clip, adds a sine wave to it,
-// and modulates the distortion amount
 public class AudioManipulator : MonoBehaviour
 {
     public float _distortionSpeed = 1f;
