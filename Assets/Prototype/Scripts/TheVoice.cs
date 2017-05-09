@@ -72,12 +72,12 @@ public class TheVoice : MonoBehaviour
         {
             float axisValue = Input.GetAxis(axisTagPair._inputAxis);
 
-            if (axisValue != 0)
+            if (!Mathf.Approximately(axisValue, 0))
             {
                 _audioSource.clip = SelectAudioClipByTag(axisTagPair._tag);
+                _audioSource.Play();
             }
         }
-        _audioSource.Play();
     }
 
     // select a random clip from the list of clips with the given tag

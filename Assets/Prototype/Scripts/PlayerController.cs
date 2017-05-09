@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     // the rigidbody that we assume is attached to the player which takes care of things like moving through walls
     private Rigidbody _rigidbody;
-    
+
     private void Start()
     {
         // get the Rigidbody object from the GameObject this script (or component) is attached to
@@ -37,11 +37,15 @@ public class PlayerController : MonoBehaviour
         float rotationAmount = Input.GetAxis(_rotationAxis);
 
         // compute the displacement from the axes
-        Vector3 horizontalDisplacement = Vector3.one * horizontalAmount * _moveSpeed * Time.deltaTime;
-        Vector3 verticalDisplacement = Vector3.one * verticalAmount * _moveSpeed * Time.deltaTime;
+        Vector3 horizontalDisplacement = Vector3.right * horizontalAmount * _moveSpeed * Time.deltaTime;
+        Vector3 verticalDisplacement = Vector3.forward * verticalAmount * _moveSpeed * Time.deltaTime;
 
         // compute the rotation from the axis
-        Quaternion rotation = Quaternion.AngleAxis(rotationAmount * _rotationSpeed * Time.deltaTime, Vector3.up);
+        Quaternion rotation = Quaternion.identity;
+        if (!Mathf.Approximately(rotationAmount, 0))
+        {
+            rotation = Quaternion.AngleAxis(rotationAmount * _rotationSpeed * Time.deltaTime, Vector3.up);
+        }
 
         // compute the desired next position of the player
         Vector3 nextPosition = transform.position + horizontalDisplacement + verticalDisplacement;
