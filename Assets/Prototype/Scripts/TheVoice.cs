@@ -34,6 +34,9 @@ public class TheVoice : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    // sentinel to keep track of whether audio has fired or not this frame
+    private bool _played = false;
+
     private void Start()
     {
         // setup audio source
@@ -72,12 +75,19 @@ public class TheVoice : MonoBehaviour
         {
             float axisValue = Input.GetAxis(axisTagPair._inputAxis);
 
-            if (!Mathf.Approximately(axisValue, 0))
+            if (!Mathf.Approximately(axisValue, 0) && !_played)
             {
                 _audioSource.clip = SelectAudioClipByTag(axisTagPair._tag);
                 _audioSource.Play();
+                _played = true;
+
+                // let the boss respond if this GameObject is close enough
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<TheBoss>().RespondToPlayer();
             }
         }
+
+        // reset the sentinel
+        _played = false;
     }
 
     // select a random clip from the list of clips with the given tag

@@ -31,14 +31,16 @@ public class CameraController : MonoBehaviour
 
         // set the rotation to be relative to _following's orientation
         _camera.transform.rotation = _following.transform.rotation;
+
+        _camera.transform.parent = _following.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdatePosition();
+        //UpdatePosition();
 
-        UpdateRotation();
+        //UpdateRotation();
     }
 
     private void UpdatePosition()

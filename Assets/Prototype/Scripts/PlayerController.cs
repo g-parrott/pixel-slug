@@ -40,18 +40,20 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalDisplacement = Vector3.right * horizontalAmount * _moveSpeed * Time.deltaTime;
         Vector3 verticalDisplacement = Vector3.forward * verticalAmount * _moveSpeed * Time.deltaTime;
 
+        // Bugged for now
         // compute the rotation from the axis
-        Quaternion rotation = Quaternion.identity;
-        if (!Mathf.Approximately(rotationAmount, 0))
-        {
-            rotation = Quaternion.AngleAxis(rotationAmount * _rotationSpeed * Time.deltaTime, Vector3.up);
-        }
+        //Quaternion rotation = Quaternion.identity;
+        //if (!Mathf.Approximately(rotationAmount, 0))
+        //{
+        //    rotation = Quaternion.AngleAxis(rotationAmount * _rotationSpeed * Time.deltaTime, Vector3.up);
+        //}
 
         // compute the desired next position of the player
         Vector3 nextPosition = transform.position + horizontalDisplacement + verticalDisplacement;
 
         // use the rigidbody to make sure the desired position is physically possible to go to
         _rigidbody.MovePosition(nextPosition);
-        _rigidbody.MoveRotation(rotation);
+
+        //_rigidbody.MoveRotation(rotation);
     }
 }
