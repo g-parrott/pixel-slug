@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -98,6 +99,53 @@ public class TheVoice : MonoBehaviour
         int randomIndex = Random.Range(0, clipsWithTag.Count);
 
         return clipsWithTag[randomIndex];
+    }
+
+    private AudioClip SelectAudioClipByTagList(IEnumerable<string> tags)
+    {
+        // get all the voice lines with at least one of the tags
+        List<List<TaggedVoiceLine>> taggedLines = new List<List<TaggedVoiceLine>>();
+        foreach (var tag in tags)
+        {
+            taggedLines.Add(GetVoiceLinesWithTag(tag));
+        }
+
+        // this is the list we will select from
+        List<AudioClip> clipsWithAllTags = new List<AudioClip>();
+
+        // find the AudioClip(s) that have all tags in the list in order to construct the list of clips to select from
+        bool hasAllTags = false;
+        // iterate through every list of TaggedVoiceLine(s) with at least one tag in common with the tag list
+        foreach (var lineList in taggedLines) 
+        {
+            // iterate through each line with a specific tag
+            foreach (var line in lineList)
+            {
+                // assume it meets the criteria
+                hasAllTags = true;
+                foreach (var tag in tags)
+                {
+                    // if a line does not have every tag required, it does not meet the criteria, so break
+                    // out of the loop
+                    if (!line._tags.Contains(tag))
+                    {
+                        hasAllTags = false;
+                        break;
+                    }
+                }
+
+                // if we have not already added the clip (e.g. there is overlap)
+                // and the clip is tagged with every tag in the collection,
+                // add it to the list of clips to select from
+                if (hasAllTags && !clipsWithAllTags.Contains(line._audioClip))
+                {
+                    clipsWithAllTags.Add(line._audioClip);
+                }
+            }
+        }
+
+        // select a random clip from the list
+        return clipsWithAllTags[Random.Range(0, clipsWithAllTags.Count)];
     }
 
     private List<TaggedVoiceLine> GetVoiceLinesWithTag(string tag)
