@@ -8,14 +8,10 @@ public class CameraController : MonoBehaviour
     // the game object the camera will follow
     public GameObject _following;
 
-    // controls the speed at which the camera "catches up" with the _following object
-    public float _followSpeed = 10f;
-
     // the relative position to the _following object that this camera will maintain
     public Vector3 _offset = new Vector3(0, 2, -5);
 
-    // controls the speed at which the camera rotates to match the _following's orientation
-    public float _rotationSpeed = 10f;
+    public float _lookUpAngle = 22.5f;
 
     // the camera this script controls
     private Camera _camera;
@@ -32,28 +28,21 @@ public class CameraController : MonoBehaviour
         // set the rotation to be relative to _following's orientation
         _camera.transform.rotation = _following.transform.rotation;
 
+        // parent the transform of the camera to the following object
         _camera.transform.parent = _following.transform;
+
+        // look at the following object
+        _camera.transform.LookAt(_following.transform);
+
+        // then rotate above the object's head a bit
+        _camera.transform.RotateAround(_following.transform.position, -transform.right, _lookUpAngle);
+
+        // and move the camera up a bit
+        _camera.transform.Translate(Vector3.up * _offset.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        _camera.transform.LookAt(_following.transform);
-        
-        //UpdatePosition();
-
-        //UpdateRotation();
-    }
-
-    private void UpdatePosition()
-    {
-        // linearly interpolate between the camera's current position and the offset position from _following
-        _camera.transform.position = Vector3.Lerp(_camera.transform.position, _following.transform.position + _offset, Time.deltaTime * _followSpeed);
-    }
-
-    private void UpdateRotation()
-    {
-        // linearly interpolate between the camer's current rotation and _follwing's rotation
-        _camera.transform.rotation = Quaternion.Lerp(_camera.transform.rotation, _following.transform.rotation, Time.deltaTime * _rotationSpeed);
     }
 }
