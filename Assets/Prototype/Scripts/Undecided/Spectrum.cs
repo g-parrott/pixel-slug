@@ -14,14 +14,6 @@ public struct Bounds
     float _yMax;
 }
 
-public enum Choice
-{
-    A,
-    B,
-    C,
-    D
-}
-
 public enum SpectrumFunction
 {
     MoveAway,
