@@ -34,7 +34,6 @@ public class Spectrum : MonoBehaviour
 
     private void Start()
     {
-
         // TODO: grab workers from scene and put them in their respective positions on the spectrum
     }
 
