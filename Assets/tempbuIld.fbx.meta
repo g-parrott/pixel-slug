@@ -1,20 +1,14 @@
 fileFormatVersion: 2
-guid: 4b69704719a30904992efaa586ff0463
-timeCreated: 1494557982
+guid: 804808bef00e84acd9649f1d62cf19ed
+timeCreated: 1495138413
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Camera
-    100002: Lamp
-    100004: Plane
-    100006: //RootNode
-    400000: Camera
-    400002: Lamp
-    400004: Plane
-    400006: //RootNode
-    2300000: Plane
-    3300000: Plane
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Plane
   materials:
     importMaterials: 1
@@ -26,8 +20,6 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
