@@ -14,14 +14,6 @@ public struct Bounds
     float _yMax;
 }
 
-public enum Choice
-{
-    A,
-    B,
-    C,
-    D
-}
-
 public enum SpectrumFunction
 {
     MoveAway,
@@ -42,7 +34,6 @@ public class Spectrum : MonoBehaviour
 
     private void Start()
     {
-
         // TODO: grab workers from scene and put them in their respective positions on the spectrum
     }
 
