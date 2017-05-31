@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0d7f9145732da4133bd5e4758674ae73
+timeCreated: 1496180374
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 300
+  forceTextureCase: -1
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Pecita
+  fontNames:
+  - Pecita
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
