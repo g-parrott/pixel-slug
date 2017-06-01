@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     // the relative position to the _following object that this camera will maintain
     public Vector3 _offset = new Vector3(0, 2, -5);
 
+	// set camera angle relative to player
     public float _lookUpAngle = 22.5f;
 
     // the camera this script controls
