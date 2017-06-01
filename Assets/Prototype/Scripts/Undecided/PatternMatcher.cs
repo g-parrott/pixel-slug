@@ -87,31 +87,39 @@ public class PatternRule
 
 public class InteractionRule
 {
+<<<<<<< HEAD
     public Color _focus;
 
     public Color _leftOf;
 
     public Color _rightOf;
+=======
+    public Color Focus { get; private set; }
+
+    public Color LeftOf { get; private set; }
+
+    public Color RightOf { get; private set; }
+>>>>>>> bfdc3250c151411528adb4ee6378d34e07c5654c
 
     public InteractionRule(Color focus, Color leftOf, Color rightOf)
     {
-        _focus = focus;
-        _leftOf = leftOf;
-        _rightOf = rightOf;
+        Focus = focus;
+        LeftOf = leftOf;
+        RightOf = rightOf;
     }
 
     public void RotateLeft()
     {
-        _focus = PatternUtils.GetLeftOf(_focus);
-        _leftOf = PatternUtils.GetLeftOf(_leftOf);
-        _rightOf = PatternUtils.GetLeftOf(_rightOf);
+        Focus = PatternUtils.GetLeftOf(Focus);
+        LeftOf = PatternUtils.GetLeftOf(LeftOf);
+        RightOf = PatternUtils.GetLeftOf(RightOf);
     }
 
     public void RotateRight()
     {
-        _focus = PatternUtils.GetRightOf(_focus);
-        _leftOf = PatternUtils.GetRightOf(_leftOf);
-        _rightOf = PatternUtils.GetRightOf(_rightOf);
+        Focus = PatternUtils.GetRightOf(Focus);
+        LeftOf = PatternUtils.GetRightOf(LeftOf);
+        RightOf = PatternUtils.GetRightOf(RightOf);
     }
 }
 
