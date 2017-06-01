@@ -34,19 +34,15 @@ public class PlayerController : MonoBehaviour
         // for more information about this, see https://docs.unity3d.com/ScriptReference/Input.GetAxis.html
         float horizontalAmount = Input.GetAxis(_leftRightAxis);
         float verticalAmount = Input.GetAxis(_forwardBackAxis);
-        float rotationAmount = Input.GetAxis(_rotationAxis);
+
 
         // compute the displacement from the axes
         Vector3 horizontalDisplacement = Vector3.right * horizontalAmount * _moveSpeed * Time.fixedDeltaTime;
         Vector3 verticalDisplacement = Vector3.forward * verticalAmount * _moveSpeed * Time.fixedDeltaTime;
 
-        // Bugged for now
-        // compute the rotation from the axis
-        //Quaternion rotation = Quaternion.identity;
-        //if (!Mathf.Approximately(rotationAmount, 0))
-        //{
-        //    rotation = Quaternion.AngleAxis(rotationAmount * _rotationSpeed * Time.deltaTime, Vector3.up);
-        //}
+		// rotate with mouse
+		float h = _rotationSpeed * Input.GetAxis("Mouse X");
+		transform.Rotate(0, 0, h);
 
         // compute the desired next position of the player
         Vector3 nextPosition = transform.position + horizontalDisplacement + verticalDisplacement;
@@ -62,10 +58,7 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-        // use the rigidbody to make sure the desired position is physically possible to go to
+        // move the player's position
 		transform.position = nextPosition;
-		//_rigidbody.MovePosition(nextPosition);
-
-        //_rigidbody.MoveRotation(rotation);
     }
 }
