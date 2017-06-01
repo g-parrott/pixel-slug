@@ -35,10 +35,15 @@ public class PlayerController : MonoBehaviour
         float horizontalAmount = Input.GetAxis(_leftRightAxis);
         float verticalAmount = Input.GetAxis(_forwardBackAxis);
 
+		Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
+		forward.y = 0;
+		forward = forward.normalized;
+		Vector3 right  = new Vector3(forward.z, 0, -forward.x);
+
 
         // compute the displacement from the axes
-        Vector3 horizontalDisplacement = Vector3.right * horizontalAmount * _moveSpeed * Time.fixedDeltaTime;
-        Vector3 verticalDisplacement = Vector3.forward * verticalAmount * _moveSpeed * Time.fixedDeltaTime;
+        Vector3 horizontalDisplacement = right * horizontalAmount * _moveSpeed * Time.fixedDeltaTime;
+        Vector3 verticalDisplacement = forward * verticalAmount * _moveSpeed * Time.fixedDeltaTime;
 
 		// rotate with mouse
 		float h = _rotationSpeed * Input.GetAxis("Mouse X");
