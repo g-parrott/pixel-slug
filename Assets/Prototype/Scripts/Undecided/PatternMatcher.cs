@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using UnityEngine;
 
@@ -89,11 +87,11 @@ public class PatternRule
 
 public class InteractionRule
 {
-    Color _focus;
+    public Color _focus;
 
-    Color _leftOf;
+    public Color _leftOf;
 
-    Color _rightOf;
+    public Color _rightOf;
 
     public InteractionRule(Color focus, Color leftOf, Color rightOf)
     {
