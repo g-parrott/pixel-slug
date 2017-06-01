@@ -87,19 +87,11 @@ public class PatternRule
 
 public class InteractionRule
 {
-<<<<<<< HEAD
-    public Color _focus;
-
-    public Color _leftOf;
-
-    public Color _rightOf;
-=======
     public Color Focus { get; private set; }
 
     public Color LeftOf { get; private set; }
 
     public Color RightOf { get; private set; }
->>>>>>> bfdc3250c151411528adb4ee6378d34e07c5654c
 
     public InteractionRule(Color focus, Color leftOf, Color rightOf)
     {
