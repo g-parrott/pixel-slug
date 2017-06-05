@@ -1,32 +1,21 @@
-/**
- * PeepPather.cs
- * 
- * Given a list of GameObject(s), uses the NavMeshAgent attached
- * to this GameObject to path between the given list of GameObject(s)
- * in order of their position within the list
- *
- * Authors: Gabriel Parrott, Alexandra Winters
- */
-
 using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.AI;
 
-// PARAMETER DESCRIPTION *****************
-
-// _toPathTo: The list of destinations to cycle between
-// _acceptableDistance: The distance within which the agent will wait until moving to the next destination
-// _timeToWaitAtDestination: The time to spend waiting in seconds
-
-// END PARAMETER DESCRIPTION *************
+// Given a list of GameObject(s), uses the NavMeshAgent attached
+// to this GameObject to path between the given list of GameObject(s)
+// in order of their position within the list
 [RequireComponent(typeof(NavMeshAgent))]
 public class PeepPather : MonoBehaviour
 {
+    // the list of destinations to cycle between
     public List<GameObject> _toPathTo = new List<GameObject>();
 
+    // the distance within which the agent will wait until moving to the  next destination
     public float _acceptableDistance = 0.25f;
 
+    // time to spend waiting in seconds
     public float _timeToWaitAtDestination = 1f;
 
     // timer used to control how long until the agent moves
@@ -39,12 +28,9 @@ public class PeepPather : MonoBehaviour
     // reference to the NavMeshAgent component
     private NavMeshAgent _agent;
 
-    private void Awake()
+    private void Start()
     {
-        // get the reference to the NavMeshAgent component
         _agent = GetComponent<NavMeshAgent>();
-        _timeWaiting = 0;
-        _destinationIndex = 0;
     }
 
     private void Update()
@@ -58,11 +44,13 @@ public class PeepPather : MonoBehaviour
         // check if we've waiting long enough
         if (_timeWaiting >= _timeToWaitAtDestination)
         {
-            // increment destination index with looparound
-            _destinationIndex = (_destinationIndex == _toPathTo.Count - 1) ? 0 : _destinationIndex + 1;
-            
+
             // set the next destination
             _agent.SetDestination(_toPathTo[_destinationIndex].transform.position);
+
+			// increment destination index with looparound
+			_destinationIndex = (_destinationIndex == _toPathTo.Count - 1) ? 0 : _destinationIndex + 1;
+
 
             // reset the timer
             _timeWaiting = 0;
