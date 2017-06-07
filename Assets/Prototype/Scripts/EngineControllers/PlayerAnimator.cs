@@ -22,20 +22,30 @@ public class PlayerAnimator : MonoBehaviour
 
 		// get the amount of movement this frame
 		float move = Input.GetAxis ("Horizontal") + Input.GetAxis("Vertical");
-
+		if (Input.GetKey (KeyCode.W)) {
+			anim.SetBool ("Walking", true);
+		} else if (Input.GetKey (KeyCode.S)) {
+			anim.SetBool ("Walking", true);
+		} else if (Input.GetKey (KeyCode.A)) {
+			anim.SetBool ("Walking", true);
+		} else if (Input.GetKey (KeyCode.D)) {
+			anim.SetBool ("Walking", true);
+		} else {
+			anim.SetBool ("Walking", false);
+		}
 		// set the speed of movement
 		anim.SetFloat ("Speed", move);
 
 		// walk if we moved this frame
-		if (move != 0) 
+		/*if (move != 0) 
 		{
-			anim.SetBool ("walking", true);
+			anim.SetBool ("Walking", true);
 		}
 
 		// stay still if we didn't
 		else
 		{
-			anim.SetBool ("walking", false);
-		}
+			anim.SetBool ("Walking", false);
+		}*/
 	}
 }
