@@ -3,7 +3,7 @@ using UnityEngine;
 // controls the player's movement and ensures that it doesn't penetrate any surfaces we'd like to assume are solid
 public class PlayerController : MonoBehaviour
 {
-    // teh speed at which the player moves
+    // the speed at which the player moves
     public float _moveSpeed = 10f;
 
     // the speed at which the player rotates
@@ -28,32 +28,42 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // get the values from the axes
         // for more information about this, see https://docs.unity3d.com/ScriptReference/Input.GetAxis.html
         float horizontalAmount = Input.GetAxis(_leftRightAxis);
         float verticalAmount = Input.GetAxis(_forwardBackAxis);
-        float rotationAmount = Input.GetAxis(_rotationAxis);
+
+		Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
+		forward.y = 0;
+		forward = forward.normalized;
+		Vector3 right  = new Vector3(forward.z, 0, -forward.x);
+
 
         // compute the displacement from the axes
-        Vector3 horizontalDisplacement = Vector3.right * horizontalAmount * _moveSpeed * Time.deltaTime;
-        Vector3 verticalDisplacement = Vector3.forward * verticalAmount * _moveSpeed * Time.deltaTime;
+        Vector3 horizontalDisplacement = right * horizontalAmount * _moveSpeed * Time.fixedDeltaTime;
+        Vector3 verticalDisplacement = forward * verticalAmount * _moveSpeed * Time.fixedDeltaTime;
 
-        // Bugged for now
-        // compute the rotation from the axis
-        //Quaternion rotation = Quaternion.identity;
-        //if (!Mathf.Approximately(rotationAmount, 0))
-        //{
-        //    rotation = Quaternion.AngleAxis(rotationAmount * _rotationSpeed * Time.deltaTime, Vector3.up);
-        //}
+		// rotate with mouse
+		float h = _rotationSpeed * Input.GetAxis("Mouse X");
+		transform.Rotate(0, 0, h);
 
         // compute the desired next position of the player
         Vector3 nextPosition = transform.position + horizontalDisplacement + verticalDisplacement;
 
-        // use the rigidbody to make sure the desired position is physically possible to go to
-        _rigidbody.MovePosition(nextPosition);
+		// check if player would go through a wall and if so don't go through the wall
+		foreach (var hit in Physics.RaycastAll(transform.position, (horizontalDisplacement + verticalDisplacement).normalized)) {
+			if (hit.transform.tag == "Level") {
+				var point = hit.point;
+				var distance = Vector3.Distance (transform.position, point);
+				if (distance < 1) {
+					nextPosition = transform.position;
+				}
+			}
+		}
 
-        //_rigidbody.MoveRotation(rotation);
+        // move the player's position
+		transform.position = nextPosition;
     }
 }
