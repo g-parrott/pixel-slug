@@ -47,7 +47,8 @@ public class PlayerController : MonoBehaviour
 
 		// rotate with mouse
 		float h = _rotationSpeed * Input.GetAxis("Mouse X");
-		transform.Rotate(0, 0, h);
+		//transform.Rotate(0, 0, h);
+		transform.RotateAround(transform.position, Vector3.up, h * Time.deltaTime);
 
         // compute the desired next position of the player
         Vector3 nextPosition = transform.position + horizontalDisplacement + verticalDisplacement;
