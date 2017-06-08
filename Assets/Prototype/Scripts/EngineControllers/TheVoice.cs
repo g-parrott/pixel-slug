@@ -82,8 +82,6 @@ public class TheVoice : MonoBehaviour
                 _audioSource.Play();
                 _played = true;
 
-                // let the boss respond if this GameObject is close enough
-                GameObject.FindGameObjectWithTag("Boss").GetComponent<TheBoss>().RespondToPlayer();
             }
         }
 
