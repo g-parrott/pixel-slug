@@ -1,6 +1,7 @@
 Final Project for Computational Media 120 and Games & Playable Media 120 at University of California Santa Cruz
 
-Using this project:
+**Using this project**:
+
   Simply clone this project somewhere and open up the folder in Unity Engine :)
 
 Team:
