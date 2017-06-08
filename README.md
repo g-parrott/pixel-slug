@@ -4,13 +4,13 @@ Final Project for Computational Media 120 and Games & Playable Media 120 at Univ
 
   Simply clone this project somewhere and open up the folder in Unity Engine :)
 
-Team:
+**Team**:
   * Gabriel Parrott
   * Alexandra Winters
   * Ajay Balaram
   * Dominique Dejarnatt
 
-Tools Used:
+**Tools Used**:
   * **Unity Engine**: https://unity3d.com
   * **Blender**: https://www.blender.org
   * **REAPER**: www.reaper.fm
