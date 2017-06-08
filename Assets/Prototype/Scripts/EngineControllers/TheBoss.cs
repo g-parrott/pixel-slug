@@ -14,7 +14,7 @@ public class TheBoss : MonoBehaviour
     // represents the time between voice lines
     public float _interactionDelay = 2.5f;
 
-    public List<AudioClip> _audioClips = new List<AudioClip>();
+    private AudioClip _nextClip;
 
     private const string _playerTag = "Player";
 
@@ -47,7 +47,7 @@ public class TheBoss : MonoBehaviour
             _timeSinceLastInteraction = 0f;
             _timeSinceResponseRequested = 0f;
 
-            _audioSource.clip = ChooseClip();
+            _audioSource.clip = _nextClip;
             _audioSource.Play();
         }
 
@@ -62,8 +62,10 @@ public class TheBoss : MonoBehaviour
         }
     }
 
-    public void RespondToPlayer()
+    public void RespondToPlayer(AudioClip toPlay)
     {
+        _nextClip = toPlay;
+
         if (IsPlayerInRange() && !_shouldRespond && _timeSinceLastInteraction > _interactionDelay)
         {
             _shouldRespond = true;
@@ -83,11 +85,5 @@ public class TheBoss : MonoBehaviour
         }
 
         return false;
-    }
-
-    private AudioClip ChooseClip()
-    {
-        // TODO: Make this meaningful
-        return _audioClips[Random.Range(0, _audioClips.Count)];
     }
 }
