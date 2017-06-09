@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/**
+ * CameraController.cs
+ * Author(s): Gabriel Parrott, Dominique Dejarnatt
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,14 +16,14 @@ public class CameraController : MonoBehaviour
     // the relative position to the _following object that this camera will maintain
     public Vector3 _offset = new Vector3(0, 2, -5);
 
-	// set camera angle relative to player
+    // set camera angle relative to player
     public float _lookUpAngle = 22.5f;
 
     // the camera this script controls
     private Camera _camera;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         // get the main camera
         _camera = Camera.main;
@@ -40,10 +45,5 @@ public class CameraController : MonoBehaviour
 
         // and move the camera up a bit
         _camera.transform.Translate(Vector3.up * _offset.y);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }

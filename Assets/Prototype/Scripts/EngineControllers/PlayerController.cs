@@ -1,3 +1,8 @@
+/**
+ * PlayerController.cs
+ * Author(s): Dominique Dejarnatt, Gabriel Parrott
+ */
+
 using UnityEngine;
 
 // controls the player's movement and ensures that it doesn't penetrate any surfaces we'd like to assume are solid
@@ -35,36 +40,40 @@ public class PlayerController : MonoBehaviour
         float horizontalAmount = Input.GetAxis(_leftRightAxis);
         float verticalAmount = Input.GetAxis(_forwardBackAxis);
 
-		Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
-		forward.y = 0;
-		forward = forward.normalized;
-		Vector3 right  = new Vector3(forward.z, 0, -forward.x);
-
+        // compute the projection of the camera's transform onto the player's transform
+        // for rotation
+        Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
+        forward.y = 0;
+        forward = forward.normalized;
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
 
         // compute the displacement from the axes
         Vector3 horizontalDisplacement = right * horizontalAmount * _moveSpeed * Time.fixedDeltaTime;
         Vector3 verticalDisplacement = forward * verticalAmount * _moveSpeed * Time.fixedDeltaTime;
 
-		// rotate with mouse
-		float h = _rotationSpeed * Input.GetAxis("Mouse X");
-		//transform.Rotate(0, 0, h);
-		transform.RotateAround(transform.position, Vector3.up, h * Time.deltaTime);
+        // rotate with mouse
+        float h = _rotationSpeed * Input.GetAxis("Mouse X");
+        transform.RotateAround(transform.position, Vector3.up, h * Time.deltaTime);
 
         // compute the desired next position of the player
         Vector3 nextPosition = transform.position + horizontalDisplacement + verticalDisplacement;
 
-		// check if player would go through a wall and if so don't go through the wall
-		foreach (var hit in Physics.RaycastAll(transform.position, (horizontalDisplacement + verticalDisplacement).normalized)) {
-			if (hit.transform.tag == "Level") {
-				var point = hit.point;
-				var distance = Vector3.Distance (transform.position, point);
-				if (distance < 1) {
-					nextPosition = transform.position;
-				}
-			}
-		}
+        // check if player would go through a wall and if so don't go through the wall
+        foreach (var hit in Physics.RaycastAll(transform.position, (horizontalDisplacement + verticalDisplacement).normalized))
+        {
+            if (hit.transform.tag == "Level")
+            {
+                var point = hit.point;
+                var distance = Vector3.Distance(transform.position, point);
+                float minDistance = 1; // determined experimentally
+                if (distance < minDistance)
+                {
+                    nextPosition = transform.position;
+                }
+            }
+        }
 
         // move the player's position
-		transform.position = nextPosition;
+        transform.position = nextPosition;
     }
 }
