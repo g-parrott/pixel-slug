@@ -1,3 +1,8 @@
+/**
+ * PeepPather.cs
+ * Author(s): Gabriel Parrott, Alexandra Winters
+ */
+
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -48,8 +53,8 @@ public class PeepPather : MonoBehaviour
             // set the next destination
             _agent.SetDestination(_toPathTo[_destinationIndex].transform.position);
 
-			// increment destination index with looparound
-			_destinationIndex = (_destinationIndex == _toPathTo.Count - 1) ? 0 : _destinationIndex + 1;
+            // increment destination index with looparound
+            _destinationIndex = (_destinationIndex == _toPathTo.Count - 1) ? 0 : _destinationIndex + 1;
 
 
             // reset the timer

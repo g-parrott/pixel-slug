@@ -1,27 +1,42 @@
+/**
+ * NarrativeController.cs
+ * Author: Gabriel Parrott
+ */
+
 using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
 
+// Interface to what is essentially a graph traversal with textual/audio representation of the traversal
 [RequireComponent(typeof(AudioSource))]
 public class NarrativeController : MonoBehaviour
 {
+    // the radius in which the player may interact with an npc
     public float _interactionRadius = 5f;
 
+    // the nodes we will add to the graph
     public List<StoryNode> _nodes = new List<StoryNode>();
 
+    // the clips that will be used for npc harmonies
     public List<AudioClip> _responseClips = new List<AudioClip>();
 
+    // the keys which correspond to the player traversing the graph/making sound/changing the textual representation
     public KeyCode[] _actionKeys = new KeyCode[4] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
 
+    // A light we will change the color of depending on the state of the graph traversal
     public Light _light;
 
+    // the text we will change depending on the state of the graph traversal
     public Text _text;
 
+    // the graph representation of the narrative
     private StoryGraph<StoryNode> _graph = new StoryGraph<StoryNode>();
 
+    // utility collection to make translating keyboard input events to integers easier
     private Dictionary<KeyCode, int> _keyToIndexMap = new Dictionary<KeyCode, int>();
 
+    // the AudioSource object we will use to play sound on a computer
     private AudioSource _audioSource;
 
     private void Start()
@@ -53,12 +68,6 @@ public class NarrativeController : MonoBehaviour
 
     private void Update()
     {
-        // quit the game if the player decides to do that
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-        
         foreach (var code in _actionKeys)
         {
             if (Input.GetKeyDown(code))
@@ -84,6 +93,10 @@ public class NarrativeController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Traverse to the next node in the graph, depending on the KeyCode that is passed in
+    /// </summary>
+    /// <param name="key">A KeyCode that determines which edge will be traversed</param>
     private void TraverseNext(KeyCode key)
     {
         int input = _keyToIndexMap[key];
