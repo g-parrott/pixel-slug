@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour {
 	void OnMouseUp () {
 		if (isStart) {
 			Debug.Log ("OMG you pressed Start woohoo");
-			SceneManager.LoadScene ("prototype-Alex");
+			SceneManager.LoadScene ("FINAL");
 		}
 		if (isQuit) {
 			Application.Quit();
