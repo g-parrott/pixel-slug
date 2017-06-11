@@ -1,3 +1,8 @@
+/**
+ * StoryGraph.cs
+ * Author: Gabriel Parrott
+ */
+
 using System.Collections.Generic;
 
 using UnityEngine;

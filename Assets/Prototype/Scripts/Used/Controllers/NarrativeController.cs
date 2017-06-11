@@ -103,17 +103,26 @@ public class NarrativeController : MonoBehaviour
         StoryNode nextNode = ChooseNext(input);
         _graph.SetCurrent(nextNode);
     }
-
+    
+    /// <summary>
+    /// Set the clip of the AudioSource
+    /// </summary>
     private void UpdateClip()
     {
         _audioSource.clip = GetClip();
     }
 
+    /// <summary>
+    /// Play the current audio clip
+    /// </summary>
     private void PlayCurrent()
     {
         _audioSource.Play();
     }
 
+    /// <summary>
+    /// Makes an NPC harmonize with the player if they are close enough
+    /// </summary>
     private void Harmonize()
     {
         // play the npc response to the player's decision if the player is in range of an interactable npc
@@ -128,22 +137,33 @@ public class NarrativeController : MonoBehaviour
                 Debug.Log("NarrativeController Warning: In Update(); Interactable object has no AudioSource. This script will not behave as expected");
             }
 
+            // load and play the clip
             source.clip = GetResponseClip();
             source.Play();
         }
     }
 
+    /// <summary>
+    /// Updates the color of the lighting
+    /// </summary>
     private void UpdateLighting()
     {
         var node = _graph.GetCurrent();
         _light.color += node._color * node._colorAddAmount * ((node._colorAddDirection) ? 1 : -1); 
     }
 
+    /// <summary>
+    /// Updates the text to represent the current node in the graph
+    /// </summary>
     private void UpdateText()
     {
         _text.text = _graph.GetCurrent()._text;
     }
 
+    /// <summary>
+    /// Gets the first interactable object that was collided with
+    /// </summary>
+    /// <returns>The first interactable object that was collided with</returns>
     private GameObject GetInteractableObjectInRange()
     {
         var sphereOverlap = Physics.OverlapSphere(transform.position, _interactionRadius);
@@ -160,6 +180,10 @@ public class NarrativeController : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Get the current AudioClip
+    /// </summary>
+    /// <returns>The AudioClip in the current node in the graph traversal</returns>
     private AudioClip GetClip()
     {
         return _graph.GetCurrent()._sound;

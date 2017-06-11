@@ -56,7 +56,6 @@ public class PeepPather : MonoBehaviour
             // increment destination index with looparound
             _destinationIndex = (_destinationIndex == _toPathTo.Count - 1) ? 0 : _destinationIndex + 1;
 
-
             // reset the timer
             _timeWaiting = 0;
         }
